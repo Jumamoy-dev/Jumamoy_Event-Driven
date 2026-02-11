@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Event Driven Portfolio</title>
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    
+<div>
+    <button class="colorMode">
+        Change Mode
+    </button>
+</div>
+
+<div class="hamburger">☰</div>
+
+<div class="sidebar" id="sidebar">
+    <a href="#hero">Hero</a>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#video">Video</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+</div>
+<div>
+<header class="hero-para" id="hero">
+    <span>REYAL O FAKHE</span>
+</header>
+
+<section id="about">
+    <h2>About</h2>
+    <p>WEBSITE NA WALA NAGKA DIMAO--CSS NGA MAKA BOANG</p>
+</section>
+
+<section id="projects" class="projects">
+    <h2>Projects</h2>
+     <div class="card"></div>
+    <div class="card"></div>
+    <div class="card"></div>
+</section>
+
+<section id="video">
+    <h2>AUTO PLAY AND PAUSE Video</h2>
+    <video id="featuredVideo" controls loop muted>
+        <source src="video.mp4" type="video/mp4">
+    </video>
+</section>
+
+<section id="skills">
+    <h2>Skills</h2>
+    <p>HTML, CSS, JavaScript,bullying, gossiping</p>
+</section>
+
+<section id="contact">
+    <h2>Contact</h2>
+    <p>Email: Bruce@gmail.com</p>
+    <p>Phone: 096996696969</p>
+</section>
+
+
+<script>
+    
+const sidebar = document.getElementById("sidebar");
+const hamburger = document.querySelector(".hamburger");
+const colorModeButton = document.querySelector(".colorMode");
+
+if(colorModeButton) {
+    colorModeButton.addEventListener("click", () => {
+        document.body.classList.toggle("dark");
+    });
+}       
+
+hamburger.addEventListener("click", () => {
+    sidebar.classList.toggle("active");
+});
+
+document.addEventListener("click", (e) => {
+    if (!sidebar.contains(e.target) && !hamburger.contains(e.target)) {
+        sidebar.classList.remove("active");
+    }
+});
+hamburger.addEventListener('click', () => {
+    if (sidebar.style.display === 'none') {
+        sidebar.style.display = 'block';
+        mainContent.style.marginLeft = "200px";
+    } else {
+        sidebar.style.display = 'none';
+        mainContent.style.marginLeft = "0";
+    }
+});
+
+
+document.addEventListener("keydown", (e) => {
+
+    if (e.key === "Escape") {
+        sidebar.classList.remove("active");
+    }
+
+    if (e.key === "ArrowDown") {
+        window.scrollBy(0, window.innerHeight);
+    }
+
+    if (e.key === "ArrowUp") {
+        window.scrollBy(0, -window.innerHeight);
+    }
+
+});
+
+
+const video = document.getElementById("featuredVideo");
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            video.play();
+        } else {
+            video.pause();
+        }
+    });
+}, { threshold: 0.5 });
+
+observer.observe(video);
+
+
+document.body.addEventListener("dblclick", () => {
+    document.body.classList.toggle("dark");
+});
+
+
+</script>
+
+</body>
+</html>
+
+<style>
+    
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+section {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.projects .card {
+    width: 200px;
+    height: 150px;
+    margin: 20px;
+    display: inline-block;
+    background: lightgray;
+    transition: 0.3s;
+}
+
+.projects .card:hover {
+    transform: scale(1.1);
+    background: skyblue;
+}
+
+
+.sidebar {
+    position: fixed;
+    left: -250px;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background: blue;
+    color: white;
+    padding-top: 60px;
+    transition: 0.3s;
+}
+
+.sidebar a {
+    display: block;
+    color: white;
+    padding: 15px;
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    background: #444;
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+.hamburger {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 25px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+
+video {
+    width: 80%;
+    max-width: 600px;
+}
+
+
+.dark {
+    background: #111;
+    color: white;
+}.colorMode{
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+}.colorMode:hover {
+    background: green;
+}.hero-para{
+    height: px;
+    background-image: url(parallax.jpg);
+    background-size: cover;
+    background-position: center 0px;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+</style>
