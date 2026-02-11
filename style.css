@@ -90,7 +90,7 @@ video {
 }.colorMode:hover {
     background: green;
 }.hero-para{
-    height: px;
+    height: 200px;
     background-image: url(parallax.jpg);
     background-size: cover;
     background-position: center 0px;
